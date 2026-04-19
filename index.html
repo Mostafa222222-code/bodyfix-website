@@ -3,497 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>BodyFix | خطتك الذكية لتحول جسدك</title>
-    <meta name="description" content="BodyFix: تطبيق اللياقة الذكي الذي يصمم خطة غذائية وتمارين مخصصة بالذكاء الاصطناعي. حمّل التطبيق الآن وابدأ رحلة تحويل جسمك.">
-    <meta name="keywords" content="BodyFix, تطبيق تمارين, نظام غذائي ذكي, body transformation, workout plan, diet plan, health & fitness">
-    <meta name="author" content="BodyFix">
-    <!-- Google Fonts -->
+    <title>BodyFix | ثورتك الذكية في اللياقة</title>
+    <meta name="description" content="BodyFix: تطبيق الذكاء الاصطناعي الأول عربياً لتصميم خطط التغذية والتمارين. حمّل الآن وابدأ تحولك.">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== متغيرات الألوان من AppStyles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --bg: #E8ECF2;
-            --surface: #FFFFFF;
-            --surface-soft: #F9FCFF;
+            --bg: #f4f7fc;
+            --surface: #ffffff;
+            --surface-soft: #ffffffcc;
             --primary: #0A2C6F;
-            --primary-alt: #4F7CFF;
-            --text: #1E293B;
-            --text-secondary: #52637A;
-            --border: #D9E2EF;
-            --tag-bg: #E3ECF9;
-            --input-bg: #FFFFFF;
-            --placeholder: #9AAFC9;
-            --success: #1F8B6C;
-            --glass-surface: rgba(255, 255, 255, 0.6);
-            --card-shadow: 0 10px 24px -12px rgba(10, 44, 111, 0.08), 0 18px 36px -18px rgba(10, 44, 111, 0.07);
-            --hover-shadow: 0 12px 22px -10px rgba(79, 124, 255, 0.24), 0 20px 34px -16px rgba(10, 44, 111, 0.16);
-            --gradient-primary: linear-gradient(135deg, #0A2C6F 0%, #1F46C7 50%, #4F7CFF 100%);
-            --progress-gradient: linear-gradient(to right, #5B85FF, #2F54EB, #0A2C6F);
+            --primary-light: #2d4f9e;
+            --primary-glow: #4F7CFF;
+            --text: #1a2a3a;
+            --text-secondary: #4a5b6e;
+            --border: #e2edf7;
+            --card-shadow: 0 20px 35px -12px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.02);
+            --hover-shadow: 0 30px 40px -18px rgba(79,124,255,0.3);
+            --gradient: linear-gradient(145deg, #0A2C6F, #1F46C7, #4F7CFF);
         }
+
         [data-theme="dark"] {
-            --bg: #0B121C;
-            --surface: #1F2A3F;
-            --surface-soft: #1A2335;
+            --bg: #0a0f1a;
+            --surface: #141c2c;
+            --surface-soft: #1f2a3fcc;
             --primary: #00E6B3;
-            --primary-alt: #2AD4B6;
-            --text: #F0F6FE;
-            --text-secondary: #B0C3DA;
-            --border: #314155;
-            --tag-bg: #25344D;
-            --input-bg: #1A243B;
-            --placeholder: #7389B0;
-            --success: #00D8A0;
-            --glass-surface: rgba(31, 42, 63, 0.7);
-            --card-shadow: 0 25px 40px -12px rgba(0, 255, 200, 0.25);
+            --primary-light: #2ad4b6;
+            --primary-glow: #2ad4b6;
+            --text: #f0f6fe;
+            --text-secondary: #b8c7e0;
+            --border: #25344d;
+            --card-shadow: 0 25px 40px -12px rgba(0,255,200,0.15);
             --hover-shadow: 0 30px 45px -12px #00E6B3;
-            --gradient-primary: linear-gradient(135deg, #00E6B3 0%, #2AD4B6 100%);
-            --progress-gradient: linear-gradient(to right, #00E6B3, #2AD4B6);
+            --gradient: linear-gradient(135deg, #00E6B3, #2AD4B6);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--bg);
+            background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.2s ease;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            transition: background 0.4s, color 0.3s;
             overflow-x: hidden;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; width: 100%; }
-        h1, h2, h3 { font-weight: 700; line-height: 1.3; }
-        h1 { font-size: 3.2rem; font-weight: 900; letter-spacing: -0.5px; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
-        h2 { font-size: 2.2rem; margin-bottom: 1rem; }
-        .gradient-text { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1.1rem;
-            border: none; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none; box-shadow: var(--card-shadow);
-            background-color: var(--surface); color: var(--text); border: 1px solid var(--border);
+
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(var(--bg-rgb), 0.7);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
         }
-        .btn-primary {
-            background: var(--gradient-primary); color: white; border: none; box-shadow: var(--hover-shadow);
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { width: 44px; height: 44px; border-radius: 16px; background: white; padding: 4px; }
+        .logo span { font-size: 1.8rem; font-weight: 900; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .menu-icon { font-size: 1.8rem; cursor: pointer; background: var(--surface-soft); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 30px; transition: all 0.2s; }
+        .controls { display: flex; gap: 12px; }
+        .theme-btn { background: var(--surface-soft); border: 1px solid var(--border); border-radius: 40px; padding: 8px 16px; font-weight: 600; cursor: pointer; display: flex; gap: 8px; transition: 0.2s; }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+            z-index: 200;
+            transition: right 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            border-left: 1px solid var(--border);
         }
-        .btn-primary:hover { transform: translateY(-3px); filter: brightness(1.1); }
-        .btn-outline { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); box-shadow: none; }
-        .btn-outline:hover { background: var(--primary); color: white; }
-        header {
-            display: flex; align-items: center; justify-content: space-between; padding: 20px 0;
-            flex-wrap: wrap; gap: 15px;
-        }
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-        .logo-img { width: 48px; height: 48px; border-radius: 14px; box-shadow: var(--card-shadow); background: var(--surface); padding: 6px; }
-        .logo-text { font-size: 1.8rem; font-weight: 900; color: var(--primary); letter-spacing: 0.5px; }
-        .controls { display: flex; align-items: center; gap: 12px; }
-        .lang-switch, .theme-switch {
-            background: var(--surface-soft); border: 1px solid var(--border); border-radius: 40px;
-            padding: 8px 16px; display: flex; align-items: center; gap: 8px; cursor: pointer;
-            transition: all 0.2s; font-weight: 600; color: var(--text-secondary);
-        }
-        .theme-switch input { display: none; }
-        .hero {
-            display: flex; align-items: center; justify-content: space-between; gap: 40px;
-            padding: 60px 0 80px; flex-wrap: wrap;
-        }
-        .hero-content { flex: 1 1 400px; }
-        .hero-badge {
-            background: var(--tag-bg); color: var(--primary); padding: 8px 20px;
-            border-radius: 40px; font-size: 1rem; font-weight: 700; display: inline-block;
-            margin-bottom: 20px; border: 1px solid var(--border);
-        }
-        .hero-description { font-size: 1.2rem; color: var(--text-secondary); margin: 24px 0 32px; max-width: 550px; }
-        .cta-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-        .hero-visual { flex: 1 1 300px; display: flex; justify-content: center; align-items: center; }
-        .app-icon-large {
-            width: 260px; height: 260px; border-radius: 56px; box-shadow: var(--hover-shadow);
-            background: var(--surface); padding: 20px; border: 1px solid var(--border);
-            object-fit: contain;
-        }
-        section { padding: 80px 0; }
-        .section-header { text-align: center; margin-bottom: 48px; }
-        .section-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
-        .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px;
-        }
-        .feature-card {
-            background: var(--surface-soft); backdrop-filter: blur(8px); border: 1px solid var(--border);
-            border-radius: 32px; padding: 32px 24px; box-shadow: var(--card-shadow);
-            transition: transform 0.25s, box-shadow 0.3s;
-        }
-        .feature-card:hover { transform: translateY(-6px); box-shadow: var(--hover-shadow); }
-        .feature-icon {
-            font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;
-            background: var(--glass-surface); width: 60px; height: 60px; display: flex;
-            align-items: center; justify-content: center; border-radius: 20px; border: 1px solid var(--border);
-        }
-        .goals-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-            margin-top: 40px;
-        }
-        .goal-card {
-            background: var(--surface); border-radius: 28px; padding: 24px; text-align: center;
-            border: 1px solid var(--border); box-shadow: var(--card-shadow);
-        }
-        .goal-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
-        .steps {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px;
-            margin-top: 40px;
-        }
-        .step {
-            text-align: center; padding: 20px;
-        }
-        .step-number {
-            width: 60px; height: 60px; background: var(--gradient-primary); border-radius: 30px;
-            display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
-            color: white; font-weight: 900; font-size: 1.8rem; box-shadow: var(--hover-shadow);
-        }
-        .stats {
-            background: var(--surface); border-radius: 48px; padding: 48px 40px;
-            margin: 40px 0; box-shadow: var(--card-shadow); border: 1px solid var(--border);
-            display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px;
-        }
-        .stat-item { text-align: center; }
+        .drawer.open { right: 0; }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; font-size: 1.5rem; font-weight: bold; border-bottom: 2px solid var(--primary); padding-bottom: 12px; }
+        .drawer-close { cursor: pointer; font-size: 1.8rem; }
+        .drawer a { text-decoration: none; color: var(--text); font-size: 1.2rem; font-weight: 600; padding: 12px 0; border-bottom: 1px solid var(--border); transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .drawer a i { width: 28px; color: var(--primary); }
+        .drawer a:hover { padding-right: 10px; color: var(--primary); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(2px); z-index: 150; display: none; }
+        .overlay.show { display: block; }
+
+        .page { display: none; padding: 40px 24px; max-width: 1200px; margin: 0 auto; animation: fadeUp 0.6s ease; }
+        .page.active-page { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .glass-card { background: var(--surface-soft); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 48px; padding: 32px; margin: 30px 0; box-shadow: var(--card-shadow); transition: all 0.3s; }
+        .glass-card:hover { transform: translateY(-5px); box-shadow: var(--hover-shadow); }
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin: 40px 0; }
+        .step-card { text-align: center; padding: 32px 20px; background: var(--surface); border-radius: 40px; transition: 0.3s; }
+        .step-number { width: 60px; height: 60px; background: var(--gradient); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; font-weight: bold; color: white; }
+        .btn-glow { background: var(--gradient); border: none; padding: 12px 32px; border-radius: 60px; font-weight: bold; color: white; font-size: 1rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 20px rgba(79,124,255,0.3); display: inline-flex; align-items: center; gap: 8px; }
+        .btn-glow:hover { transform: scale(1.02); box-shadow: 0 15px 30px rgba(79,124,255,0.5); }
+        .stats { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; background: var(--surface); border-radius: 60px; padding: 40px; margin: 40px 0; text-align: center; }
         .stat-number { font-size: 3rem; font-weight: 900; color: var(--primary); line-height: 1.2; }
-        .stat-label { color: var(--text-secondary); font-weight: 600; }
-        .plan-includes {
-            display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px;
-        }
-        .include-item {
-            flex: 1 1 250px; display: flex; align-items: center; gap: 15px;
-            background: var(--surface-soft); padding: 20px; border-radius: 24px;
-            border: 1px solid var(--border);
-        }
-        .include-item i { font-size: 2rem; color: var(--primary); }
-        .faq-item {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-            margin-bottom: 16px; padding: 20px 24px; box-shadow: var(--card-shadow);
-        }
-        .faq-question {
-            font-weight: 700; font-size: 1.2rem; display: flex; justify-content: space-between;
-            align-items: center; cursor: pointer;
-        }
-        .faq-answer { margin-top: 16px; color: var(--text-secondary); display: none; }
-        .faq-item.active .faq-answer { display: block; }
-        footer {
-            margin-top: auto; padding: 40px 0 20px; border-top: 1px solid var(--border);
-        }
-        .footer-content {
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 20px;
-        }
-        .footer-links { display: flex; gap: 32px; }
-        .footer-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
-        .footer-links a:hover { color: var(--primary); }
-        .copyright { color: var(--placeholder); font-size: 0.9rem; }
-        [dir="rtl"] .btn i { margin-left: 8px; }
-        [dir="ltr"] .btn i { margin-right: 8px; }
-        .lang-switch, .theme-switch { user-select: none; }
-        [data-theme="dark"] .fa-sun { opacity: 0.5; }
-        [data-theme="light"] .fa-moon { opacity: 0.5; }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.4rem; }
-            h2 { font-size: 1.8rem; }
-            .hero { padding: 30px 0; }
-            .container { padding: 0 20px; }
-        }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--surface); padding: 12px 28px; border-radius: 60px; font-weight: bold; box-shadow: var(--hover-shadow); z-index: 300; opacity: 0; transition: 0.2s; pointer-events: none; }
+        footer { text-align: center; padding: 40px 20px 20px; border-top: 1px solid var(--border); margin-top: 40px; }
+        .contact-email { direction: ltr; background: var(--surface); padding: 12px; border-radius: 60px; display: inline-block; margin-top: 16px; font-family: monospace; }
+        @media (max-width: 700px) { .top-bar { padding: 12px 16px; } .page { padding: 20px 16px; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo-area">
-                <img src="https://www.image2url.com/r2/default/images/1776436848581-ee1b10f8-2b70-4dfe-ba92-65ebbdd6cc7b.png" alt="BodyFix Logo" class="logo-img">
-                <span class="logo-text">BodyFix</span>
-            </div>
-            <div class="controls">
-                <div class="lang-switch" id="langToggle" role="button" tabindex="0">
-                    <i class="fas fa-language"></i>
-                    <span id="langText">English</span>
-                </div>
-                <label class="theme-switch" id="themeToggle">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
-                    <input type="checkbox" id="themeCheckbox">
-                </label>
-            </div>
-        </header>
-
-        <section class="hero fade-in">
-            <div class="hero-content">
-                <h1>
-                    <span data-i18n="hero_title_1">خطط ذكية</span><br>
-                    <span class="gradient-text" data-i18n="hero_title_2">لتحول جسمك</span>
-                </h1>
-                <p class="hero-description" data-i18n="hero_desc">
-                    BodyFix هو مدربك الشخصي الشامل. يجمع بين التغذية والتمارين المصممة خصيصًا لأهدافك بأسلوب علمي.
-                </p>
-                <div class="cta-buttons">
-                    <!-- 🔹 استبدل الرابط # برابط تطبيقك الحقيقي -->
-                    <a href="#" class="btn btn-primary" target="_blank"><i class="fab fa-google-play"></i> <span data-i18n="download_android">Google Play</span></a>
-                    <a href="#" class="btn btn-outline" target="_blank"><i class="fab fa-apple"></i> <span data-i18n="download_ios">App Store</span></a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <img src="https://www.image2url.com/r2/default/images/1776436848581-ee1b10f8-2b70-4dfe-ba92-65ebbdd6cc7b.png" alt="BodyFix App Icon" class="app-icon-large">
-            </div>
-        </section>
-    </div>
-
-    <section class="fade-in">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="features_title">مميزات تجعل BodyFix مختلفًا</h2>
-                <p data-i18n="features_subtitle">صُمم ليكون رفيقك الذكي في رحلة التحول، بمرونة ودقة غير مسبوقة.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-sliders"></i></div>
-                    <h3 data-i18n="feature1_title">خطط مخصصة بالكامل</h3>
-                    <p data-i18n="feature1_desc">يحلل التطبيق بياناتك وأهدافك ليقدم لك خطة تغذية وتمارين متكاملة ومتجددة أسبوعيًا.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-utensils"></i></div>
-                    <h3 data-i18n="feature2_title">مرونة في الوجبات</h3>
-                    <p data-i18n="feature2_desc">استبدل أي وجبة لا تفضلها ببدائل ذكية بنفس القيمة الغذائية. لا مزيد من الملل.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-dumbbell"></i></div>
-                    <h3 data-i18n="feature3_title">تبديل التمارين بذكاء</h3>
-                    <p data-i18n="feature3_desc">لا توجد معدات معينة؟ استبدل التمرين بآخر يستهدف نفس العضلة بنفس الفعالية.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-tint"></i></div>
-                    <h3 data-i18n="feature4_title">تتبع الماء والالتزام</h3>
-                    <p data-i18n="feature4_desc">تذكيرات ذكية لشرب الماء وإكمال مهام اليوم، مع إحصائيات تقدمك اليومي.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="fade-in" style="background: var(--surface-soft);">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="how_it_works">كيف يعمل BodyFix؟</h2>
-                <p data-i18n="how_it_works_desc">أربع خطوات بسيطة لبدء رحلتك نحو أفضل نسخة من جسدك.</p>
-            </div>
-            <div class="steps">
-                <div class="step"><div class="step-number">1</div><h3 data-i18n="step1_title">أخبرنا عنك</h3><p data-i18n="step1_desc">حدد هدفك، حالتك الصحية، المعدات المتاحة، والأطعمة التي لا تفضلها.</p></div>
-                <div class="step"><div class="step-number">2</div><h3 data-i18n="step2_title">احصل على خطتك</h3><p data-i18n="step2_desc">يتم بناء خطة أسبوعية شاملة: وجبات، تمارين، ومواعيد تناسبك.</p></div>
-                <div class="step"><div class="step-number">3</div><h3 data-i18n="step3_title">التزم وتطور</h3><p data-i18n="step3_desc">سجل تقدمك يوميًا، استبدل ما تشاء، ودع التطبيق يتكيف معك باستمرار.</p></div>
-                <div class="step"><div class="step-number">4</div><h3 data-i18n="step4_title">حقق هدفك بأنسب شكل</h3><p data-i18n="step4_desc">تابع تحسن أدائك وشكل جسمك أسبوعياً، واستمتع بوصولك لأفضل نتيجة تناسبك.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <section class="fade-in">
-            <div class="section-header">
-                <h2 data-i18n="goals_title">مهما كان هدفك، BodyFix معك</h2>
-                <p data-i18n="goals_desc">نصمم خططًا تناسب جميع الأهداف والحالات الصحية.</p>
-            </div>
-            <div class="goals-grid">
-                <div class="goal-card"><i class="fas fa-weight-scale"></i><h3 data-i18n="goal1">خسارة وزن</h3><p data-i18n="goal1_desc">عجز سعرات ذكي مع الحفاظ على العضلات.</p></div>
-                <div class="goal-card"><i class="fas fa-dumbbell"></i><h3 data-i18n="goal2">زيادة عضلات</h3><p data-i18n="goal2_desc">فائض سعرات محسوب وتمارين تضخيم فعالة.</p></div>
-                <div class="goal-card"><i class="fas fa-arrows-spin"></i><h3 data-i18n="goal3">إعادة تشكيل الجسم</h3><p data-i18n="goal3_desc">بناء عضلات وحرق دهون في آن واحد.</p></div>
-                <div class="goal-card"><i class="fas fa-heart-pulse"></i><h3 data-i18n="goal4">صحة عامة</h3><p data-i18n="goal4_desc">نمط حياة صحي ومتوازن للمحافظة على النشاط.</p></div>
-            </div>
-            <div style="margin-top: 40px;">
-                <h3 style="text-align: center; margin-bottom: 24px;" data-i18n="health_conditions_title">ندعم مختلف الحالات الصحية</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
-                    <span class="hero-badge" style="margin:0;">سكري</span>
-                    <span class="hero-badge" style="margin:0;">ضغط الدم</span>
-                    <span class="hero-badge" style="margin:0;">القولون العصبي</span>
-                    <span class="hero-badge" style="margin:0;">خمول الغدة</span>
-                    <span class="hero-badge" style="margin:0;">حساسية جلوتين</span>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div class="container">
-        <section class="fade-in">
-            <div class="section-header">
-                <h2 data-i18n="inside_title">كل ما تحتاجه في تطبيق واحد</h2>
-                <p data-i18n="inside_desc">أدوات قوية تجعل رحلتك سهلة وممتعة.</p>
-            </div>
-            <div class="plan-includes">
-                <div class="include-item"><i class="fas fa-utensils"></i> <span data-i18n="inside1">خطة وجبات يومية مفصلة</span></div>
-                <div class="include-item"><i class="fas fa-person-running"></i> <span data-i18n="inside2">تمارين مخصصة لك</span></div>
-                <div class="include-item"><i class="fas fa-arrows-rotate"></i> <span data-i18n="inside3">تبديل فوري للوجبات والتمارين</span></div>
-                <div class="include-item"><i class="fas fa-chart-line"></i> <span data-i18n="inside4">متابعة أسبوعية للتقدم</span></div>
-                <div class="include-item"><i class="fas fa-bell"></i> <span data-i18n="inside5">تذكيرات ذكية للماء والوجبات</span></div>
-                <div class="include-item"><i class="fas fa-language"></i> <span data-i18n="inside6">دعم كامل للغة العربية والإنجليزية</span></div>
-            </div>
-        </section>
-    </div>
-
-    <div class="container">
-        <div class="stats fade-in">
-            <div class="stat-item"><div class="stat-number"><span class="counter" data-target="580">0</span>+</div><div class="stat-label" data-i18n="stat1">مستخدم نشط</div></div>
-            <div class="stat-item"><div class="stat-number"><span class="counter" data-target="94">0</span>%</div><div class="stat-label" data-i18n="stat2">تقييم إيجابي</div></div>
-            <div class="stat-item"><div class="stat-number"><span class="counter" data-target="1250">0</span>+</div><div class="stat-label" data-i18n="stat3">خطة تم إنشاؤها</div></div>
+    <div class="top-bar">
+        <div class="logo"><img src="https://www.image2url.com/r2/default/images/1776436848581-ee1b10f8-2b70-4dfe-ba92-65ebbdd6cc7b.png" alt="BodyFix"><span>BodyFix</span></div>
+        <div style="display: flex; gap: 12px;">
+            <div class="controls"><div class="theme-btn" id="themeToggle"><i class="fas fa-moon"></i> <span>الوضع المظلم</span></div></div>
+            <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
         </div>
     </div>
 
-    <div class="container">
-        <section class="fade-in">
-            <div class="section-header"><h2 data-i18n="faq_title">الأسئلة الشائعة</h2></div>
-            <div class="faq-list">
-                <div class="faq-item"><div class="faq-question"><span data-i18n="faq1_q">هل يمكنني استخدام التطبيق بدون معدات؟</span> <i class="fas fa-plus"></i></div><div class="faq-answer" data-i18n="faq1_a">نعم، BodyFix يوفر بدائل منزلية لأغلب التمارين. يمكنك اختيار "بدون معدات" أثناء الإعداد.</div></div>
-                <div class="faq-item"><div class="faq-question"><span data-i18n="faq2_q">هل تناسب الخطط النباتيين أو ذوي الحساسيات؟</span> <i class="fas fa-plus"></i></div><div class="faq-answer" data-i18n="faq2_a">بالتأكيد. يمكنك تحديد الأطعمة التي لا تفضلها أو التي تتحسس منها وسيتم استبعادها من خطتك.</div></div>
-                <div class="faq-item"><div class="faq-question"><span data-i18n="faq3_q">كم تكلفة الاشتراك؟</span> <i class="fas fa-plus"></i></div><div class="faq-answer" data-i18n="faq3_a">نقدم خطة مجانية محدودة، واشتراكات شهرية وسنوية بأسعار تنافسية. راجع التطبيق للتفاصيل.</div></div>
+    <div class="drawer" id="drawer">
+        <div class="drawer-header"><span>BodyFix</span><div class="drawer-close" id="closeDrawer"><i class="fas fa-times"></i></div></div>
+        <a href="#" data-page="home"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="#" data-page="features"><i class="fas fa-star"></i> المميزات</a>
+        <a href="#" data-page="howitworks"><i class="fas fa-cogs"></i> كيف يعمل التطبيق؟</a>
+        <a href="#" data-page="faq"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a>
+        <a href="#" data-page="contact"><i class="fas fa-envelope"></i> تواصل معنا</a>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <div id="toastMsg" class="toast">سيتم الإضافة قريباً</div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="page-home" class="page active-page">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1 style="font-size: 3rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">BodyFix</h1>
+            <p style="font-size: 1.3rem; max-width: 700px; margin: 20px auto;">أول تطبيق عربي يعتمد على الذكاء الاصطناعي لتصميم خطة غذائية ورياضية تناسبك أنت فقط.</p>
+            <div style="margin: 30px 0; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn-glow store-btn" data-store="google"><i class="fab fa-google-play"></i> حمل من جوجل بلاي</button>
+                <button class="btn-glow store-btn" data-store="apple"><i class="fab fa-apple"></i> حمل من آب ستور</button>
             </div>
-        </section>
+        </div>
+        <div class="stats">
+            <div><div class="stat-number counter" data-target="2000">0</div><div>مستخدم نشط</div></div>
+            <div><div class="stat-number counter" data-target="96">0</div><div>تقييم إيجابي %</div></div>
+            <div><div class="stat-number counter" data-target="1500">0</div><div>خطة تم إنشاؤها</div></div>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card"><i class="fas fa-robot" style="font-size: 2.5rem; color: var(--primary);"></i><h3>ذكاء اصطناعي متطور</h3><p>يحلل بياناتك ويقدم خطة تتكيف مع تقدمك أسبوعياً.</p></div>
+            <div class="step-card"><i class="fas fa-utensils" style="font-size: 2.5rem; color: var(--primary);"></i><h3>مرونة الوجبات</h3><p>استبدل أي طعام ببديل صحي بضغطة زر.</p></div>
+            <div class="step-card"><i class="fas fa-dumbbell" style="font-size: 2.5rem; color: var(--primary);"></i><h3>تمارين شاملة</h3><p>من المنزل إلى الجيم، مع تبديل ذكي للتمارين.</p></div>
+            <div class="step-card"><i class="fas fa-chart-line" style="font-size: 2.5rem; color: var(--primary);"></i><h3>تتبع وتحفيز</h3><p>إحصائيات يومية وتذكيرات ذكية لإبقائك على المسار.</p></div>
+        </div>
+        <div class="glass-card">
+            <h3><i class="fas fa-check-circle"></i> لماذا تختار BodyFix؟</h3>
+            <p>✅ خطط شخصية 100% بناءً على أهدافك وحالتك الصحية<br>
+            ✅ واجهة عربية مبسطة وسهلة<br>
+            ✅ مجتمع داعم وتحديات أسبوعية لتحفيزك<br>
+            ✅ مزامنة سحابية آمنة وحماية خصوصية</p>
+        </div>
+    </div>
+
+    <!-- صفحة المميزات -->
+    <div id="page-features" class="page">
+        <h2 style="font-size: 2.5rem;">✨ مميزات خارقة</h2>
+        <div class="steps-grid">
+            <div class="step-card"><i class="fas fa-microchip" style="font-size: 2.5rem; color: var(--primary);"></i><h3>توصيات فائقة الذكاء</h3><p>نظامنا يتعلم من سلوكك اليومي ويقترح أوقات التمرين المناسبة.</p></div>
+            <div class="step-card"><i class="fas fa-heartbeat" style="font-size: 2.5rem; color: var(--primary);"></i><h3>مراقبة صحية</h3><p>ربط مع Apple Health و Google Fit لتحليل شامل.</p></div>
+            <div class="step-card"><i class="fas fa-users" style="font-size: 2.5rem; color: var(--primary);"></i><h3>مجتمع وتحديات</h3><p>تحديات أسبوعية مع جوائز وغرف دردشة تشجيعية.</p></div>
+            <div class="step-card"><i class="fas fa-chart-simple" style="font-size: 2.5rem; color: var(--primary);"></i><h3>تحليلات متقدمة</h3><p>رسوم بيانية لتطور الوزن والدهون والعضلات.</p></div>
+        </div>
+        <div class="glass-card"><h3><i class="fas fa-tint"></i> تتبع الماء والوجبات</h3><p>تذكيرات ذكية تشجعك على شرب الماء كل ساعة. يمكنك تسجيل كل كوب بضغطة، وتحصل على شارات تحفيزية عند تحقيق الأهداف اليومية.</p></div>
+        <div class="glass-card"><h3><i class="fas fa-language"></i> دعم كامل للغة العربية</h3><p>الواجهة بالعربية الفصحى مع دعم كامل للنصوص والتوجيه.</p></div>
+    </div>
+
+    <!-- صفحة كيف يعمل التطبيق -->
+    <div id="page-howitworks" class="page">
+        <h2 style="font-size: 2.5rem;">📱 كيف يعمل BodyFix في 4 خطوات</h2>
+        <div class="steps-grid">
+            <div class="step-card"><div class="step-number">1</div><h3>سجل بياناتك</h3><p>أدخل عمرك، وزنك، هدفك، حالتك الصحية والمعدات المتاحة.</p></div>
+            <div class="step-card"><div class="step-number">2</div><h3>أنشئ خطتك</h3><p>في ثوانٍ، يصمم الذكاء الاصطناعي خطة أسبوعية شاملة.</p></div>
+            <div class="step-card"><div class="step-number">3</div><h3>التزم وسجل</h3><p>سجل وجباتك وتمارينك ومياهك، والتطبيق يحسب كل شيء.</p></div>
+            <div class="step-card"><div class="step-number">4</div><h3>تكيف وتطور</h3><p>كل أسبوع تُحدث خطتك بناءً على أدائك السابق.</p></div>
+        </div>
+        <div class="glass-card"><h3><i class="fas fa-exchange-alt"></i> مرونة لا مثيل لها</h3><p>لا يعجبك تمرين؟ استبدله. لا ترغب في وجبة؟ اختر بديلاً. كل شيء قابل للتخصيص.</p></div>
+        <div class="glass-card"><h3><i class="fas fa-bell"></i> إشعارات محفزة</h3><p>تذكير بالوجبات، شرب الماء، التمرين، وتقرير نهاية اليوم لتحفيزك.</p></div>
+    </div>
+
+    <!-- صفحة الأسئلة الشائعة -->
+    <div id="page-faq" class="page">
+        <h2 style="font-size: 2.5rem;">❓ الأسئلة الشائعة</h2>
+        <div class="glass-card"><h3>هل التطبيق مجاني؟</h3><p>نعم، يوفر BodyFix خطة مجانية ممتازة. هناك اشتراكات مدفوعة لميزات إضافية.</p></div>
+        <div class="glass-card"><h3>هل يناسب المبتدئين؟</h3><p>بالتأكيد، التطبيق يبدأ معك بتمارين خفيفة ووجبات بسيطة، مع فيديوهات إرشادية.</p></div>
+        <div class="glass-card"><h3>ماذا لو لدي حالة صحية؟</h3><p>يمكنك إضافة حالتك الصحية والأطعمة الممنوعة وسيتم استبعادها تلقائياً.</p></div>
+        <div class="glass-card"><h3>هل يمكنني تغيير هدفي؟</h3><p>نعم، في أي وقت من الإعدادات، وسيعيد التطبيق حساب خطتك.</p></div>
+        <div class="glass-card"><h3>هل يدعم الساعات الذكية؟</h3><p>حالياً يدعم Apple Watch و Wear OS لمزامنة معدل الضربات والسعرات.</p></div>
+    </div>
+
+    <!-- صفحة تواصل معنا -->
+    <div id="page-contact" class="page">
+        <h2 style="font-size: 2.5rem;">📬 تواصل معنا</h2>
+        <div class="glass-card" style="text-align: center;">
+            <i class="fas fa-envelope" style="font-size: 3rem; color: var(--primary);"></i>
+            <p style="margin-top: 16px;">يمكنك مراسلتنا على البريد الإلكتروني:</p>
+            <div class="contact-email">admin.BodyFix@gmail.com</div>
+            <p style="margin-top: 20px;">أو استخدم النموذج أدناه وسنرد عليك في أقرب وقت.</p>
+            <div style="margin-top: 20px; max-width: 400px; margin-left: auto; margin-right: auto;">
+                <input type="text" placeholder="اسمك" style="width:100%; padding:12px; margin:8px 0; border-radius: 60px; border:1px solid var(--border); background: var(--surface);">
+                <input type="email" placeholder="بريدك الإلكتروني" style="width:100%; padding:12px; margin:8px 0; border-radius: 60px; border:1px solid var(--border); background: var(--surface);">
+                <textarea rows="3" placeholder="رسالتك" style="width:100%; padding:12px; margin:8px 0; border-radius: 24px; border:1px solid var(--border); background: var(--surface);"></textarea>
+                <button class="btn-glow" id="sendMsgBtn" style="margin-top: 10px;">إرسال</button>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="copyright">© 2025 BodyFix. <span data-i18n="all_rights">جميع الحقوق محفوظة</span>.</div>
-                <div class="footer-links">
-                    <a href="#" data-i18n="privacy">سياسة الخصوصية</a>
-                    <a href="#" data-i18n="terms">الشروط والأحكام</a>
-                    <a href="#" data-i18n="contact">تواصل معنا</a>
-                </div>
-            </div>
+        <div class="social-icons" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+            <a href="#" class="social-link"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-tiktok fa-lg"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter fa-lg"></i></a>
         </div>
+        <p>© 2025 BodyFix – جميع الحقوق محفوظة</p>
     </footer>
 
     <script>
-        (function() {
-            const translations = {
-                ar: {
-                    hero_title_1: 'خطط ذكية', hero_title_2: 'لتحول جسمك',
-                    hero_desc: 'BodyFix هو مدربك الشخصي الشامل. يجمع بين التغذية والتمارين المصممة خصيصًا لأهدافك بأسلوب علمي.',
-                    download_android: 'Google Play', download_ios: 'App Store',
-                    features_title: 'مميزات تجعل BodyFix مختلفًا',
-                    features_subtitle: 'صُمم ليكون رفيقك الذكي في رحلة التحول، بمرونة ودقة غير مسبوقة.',
-                    feature1_title: 'خطط مخصصة بالكامل', feature1_desc: 'يحلل التطبيق بياناتك وأهدافك ليقدم لك خطة تغذية وتمارين متكاملة ومتجددة أسبوعيًا.',
-                    feature2_title: 'مرونة في الوجبات', feature2_desc: 'استبدل أي وجبة لا تفضلها ببدائل ذكية بنفس القيمة الغذائية. لا مزيد من الملل.',
-                    feature3_title: 'تبديل التمارين بذكاء', feature3_desc: 'لا توجد معدات معينة؟ استبدل التمرين بآخر يستهدف نفس العضلة بنفس الفعالية.',
-                    feature4_title: 'تتبع الماء والالتزام', feature4_desc: 'تذكيرات ذكية لشرب الماء وإكمال مهام اليوم، مع إحصائيات تقدمك اليومي.',
-                    how_it_works: 'كيف يعمل BodyFix؟', how_it_works_desc: 'أربع خطوات بسيطة لبدء رحلتك نحو أفضل نسخة من جسدك.',
-                    step1_title: 'أخبرنا عنك', step1_desc: 'حدد هدفك، حالتك الصحية، المعدات المتاحة، والأطعمة التي لا تفضلها.',
-                    step2_title: 'احصل على خطتك', step2_desc: 'يتم بناء خطة أسبوعية شاملة: وجبات، تمارين، ومواعيد تناسبك.',
-                    step3_title: 'التزم وتطور', step3_desc: 'سجل تقدمك يوميًا، استبدل ما تشاء، ودع التطبيق يتكيف معك باستمرار.',
-                    step4_title: 'حقق هدفك بأنسب شكل', step4_desc: 'تابع تحسن أدائك وشكل جسمك أسبوعياً، واستمتع بوصولك لأفضل نتيجة تناسبك.',
-                    goals_title: 'مهما كان هدفك، BodyFix معك', goals_desc: 'نصمم خططًا تناسب جميع الأهداف والحالات الصحية.',
-                    goal1: 'خسارة وزن', goal1_desc: 'عجز سعرات ذكي مع الحفاظ على العضلات.',
-                    goal2: 'زيادة عضلات', goal2_desc: 'فائض سعرات محسوب وتمارين تضخيم فعالة.',
-                    goal3: 'إعادة تشكيل الجسم', goal3_desc: 'بناء عضلات وحرق دهون في آن واحد.',
-                    goal4: 'صحة عامة', goal4_desc: 'نمط حياة صحي ومتوازن للمحافظة على النشاط.',
-                    health_conditions_title: 'ندعم مختلف الحالات الصحية',
-                    inside_title: 'كل ما تحتاجه في تطبيق واحد', inside_desc: 'أدوات قوية تجعل رحلتك سهلة وممتعة.',
-                    inside1: 'خطة وجبات يومية مفصلة', inside2: 'تمارين مخصصة لك',
-                    inside3: 'تبديل فوري للوجبات والتمارين', inside4: 'متابعة أسبوعية للتقدم',
-                    inside5: 'تذكيرات ذكية للماء والوجبات', inside6: 'دعم كامل للغة العربية والإنجليزية',
-                    stat1: 'مستخدم نشط', stat2: 'تقييم إيجابي', stat3: 'خطة تم إنشاؤها',
-                    faq_title: 'الأسئلة الشائعة',
-                    faq1_q: 'هل يمكنني استخدام التطبيق بدون معدات؟', faq1_a: 'نعم، BodyFix يوفر بدائل منزلية لأغلب التمارين. يمكنك اختيار "بدون معدات" أثناء الإعداد.',
-                    faq2_q: 'هل تناسب الخطط النباتيين أو ذوي الحساسيات؟', faq2_a: 'بالتأكيد. يمكنك تحديد الأطعمة التي لا تفضلها أو التي تتحسس منها وسيتم استبعادها من خطتك.',
-                    faq3_q: 'كم تكلفة الاشتراك؟', faq3_a: 'نقدم خطة مجانية محدودة، واشتراكات شهرية وسنوية بأسعار تنافسية. راجع التطبيق للتفاصيل.',
-                    all_rights: 'جميع الحقوق محفوظة', privacy: 'سياسة الخصوصية', terms: 'الشروط والأحكام', contact: 'تواصل معنا',
-                },
-                en: {
-                    hero_title_1: 'Smart Plans', hero_title_2: 'Transform Your Body',
-                    hero_desc: 'BodyFix is your all-in-one personal coach. It combines nutrition and workouts specifically designed for your goals scientifically.',
-                    download_android: 'Google Play', download_ios: 'App Store',
-                    features_title: 'Features that make BodyFix different',
-                    features_subtitle: 'Designed to be your intelligent companion in transformation, with unmatched flexibility and precision.',
-                    feature1_title: 'Fully Personalized Plans', feature1_desc: 'Analyzes your data and goals to deliver a complete, weekly-updated nutrition & workout plan.',
-                    feature2_title: 'Flexible Meal Swaps', feature2_desc: 'Replace any meal you dislike with smart alternatives matching the same nutritional value.',
-                    feature3_title: 'Intelligent Exercise Swaps', feature3_desc: 'Missing equipment? Swap an exercise with another targeting the same muscle group.',
-                    feature4_title: 'Water & Habit Tracker', feature4_desc: 'Smart reminders for water and daily tasks, with detailed progress stats.',
-                    how_it_works: 'How BodyFix Works', how_it_works_desc: 'Four simple steps to start your journey towards the best version of your body.',
-                    step1_title: 'Tell Us About You', step1_desc: 'Set your goal, health conditions, available equipment, and disliked foods.',
-                    step2_title: 'Get Your Plan', step2_desc: 'A comprehensive weekly plan is built: meals, workouts, and schedules that fit you.',
-                    step3_title: 'Commit & Evolve', step3_desc: 'Log your daily progress, swap as you like, and let the app adapt continuously.',
-                    step4_title: 'Achieve Your Goal Perfectly', step4_desc: 'Track your performance and physique improvements weekly, and enjoy reaching your best possible result.',
-                    goals_title: 'Whatever your goal, BodyFix has you covered', goals_desc: 'We design plans that suit all goals and health conditions.',
-                    goal1: 'Weight Loss', goal1_desc: 'Smart calorie deficit while preserving muscle.',
-                    goal2: 'Muscle Gain', goal2_desc: 'Calculated surplus and effective hypertrophy workouts.',
-                    goal3: 'Body Recomposition', goal3_desc: 'Build muscle and burn fat simultaneously.',
-                    goal4: 'General Health', goal4_desc: 'Balanced healthy lifestyle to maintain vitality.',
-                    health_conditions_title: 'We support various health conditions',
-                    inside_title: 'Everything you need in one app', inside_desc: 'Powerful tools that make your journey easy and enjoyable.',
-                    inside1: 'Detailed daily meal plan', inside2: 'Personalized workouts',
-                    inside3: 'Instant meal & exercise swaps', inside4: 'Weekly progress tracking',
-                    inside5: 'Smart reminders for water & meals', inside6: 'Full Arabic & English support',
-                    stat1: 'Active Users', stat2: 'Positive Rating', stat3: 'Plans Created',
-                    faq_title: 'Frequently Asked Questions',
-                    faq1_q: 'Can I use the app without equipment?', faq1_a: 'Yes, BodyFix provides home alternatives for most exercises. Choose "No equipment" during setup.',
-                    faq2_q: 'Are the plans suitable for vegans or allergies?', faq2_a: 'Absolutely. You can specify disliked or allergic foods and they will be excluded from your plan.',
-                    faq3_q: 'How much does the subscription cost?', faq3_a: 'We offer a limited free plan, with competitive monthly and yearly subscriptions. Check the app for details.',
-                    all_rights: 'All rights reserved', privacy: 'Privacy Policy', terms: 'Terms & Conditions', contact: 'Contact Us',
-                }
-            };
-
+        (function(){
             const html = document.documentElement;
-            const langToggle = document.getElementById('langToggle');
-            const langText = document.getElementById('langText');
-            const themeCheckbox = document.getElementById('themeCheckbox');
-            const counters = document.querySelectorAll('.counter');
-            let currentLang = 'ar';
+            const themeToggle = document.getElementById('themeToggle');
+            const menuIcon = document.getElementById('menuIcon');
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+            const closeDrawerBtn = document.getElementById('closeDrawer');
+            const toast = document.getElementById('toastMsg');
 
-            function setLanguage(lang) {
-                currentLang = lang;
-                html.setAttribute('lang', lang);
-                html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-                langText.textContent = lang === 'ar' ? 'English' : 'العربية';
-                document.querySelectorAll('[data-i18n]').forEach(el => {
-                    const key = el.getAttribute('data-i18n');
-                    if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-                });
+            let dark = localStorage.getItem('theme') === 'dark';
+            function setTheme(isDark) { 
+                if(isDark) html.setAttribute('data-theme', 'dark'); 
+                else html.removeAttribute('data-theme'); 
             }
-            langToggle.addEventListener('click', () => setLanguage(currentLang === 'ar' ? 'en' : 'ar'));
+            setTheme(dark);
+            themeToggle.addEventListener('click', () => { 
+                dark = !dark; 
+                setTheme(dark); 
+                localStorage.setItem('theme', dark ? 'dark' : 'light');
+                // تغيير النص قليلاً
+                const span = themeToggle.querySelector('span');
+                if(span) span.textContent = dark ? 'الوضع الفاتح' : 'الوضع المظلم';
+            });
+            // تحديث النص الافتراضي
+            const themeSpan = themeToggle.querySelector('span');
+            if(themeSpan) themeSpan.textContent = dark ? 'الوضع الفاتح' : 'الوضع المظلم';
 
-            function setTheme(isDark) {
-                html.setAttribute('data-theme', isDark ? 'dark' : 'light');
-                themeCheckbox.checked = isDark;
+            function openDrawer() { drawer.classList.add('open'); overlay.classList.add('show'); }
+            function closeDrawerFunc() { drawer.classList.remove('open'); overlay.classList.remove('show'); }
+            menuIcon.addEventListener('click', openDrawer);
+            closeDrawerBtn.addEventListener('click', closeDrawerFunc);
+            overlay.addEventListener('click', closeDrawerFunc);
+
+            const pages = ['home', 'features', 'howitworks', 'faq', 'contact'];
+            function showPage(pageId) {
+                pages.forEach(p => { document.getElementById(`page-${p}`).classList.remove('active-page'); });
+                document.getElementById(`page-${pageId}`).classList.add('active-page');
+                closeDrawerFunc();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if(pageId === 'home') startCounters();
             }
-            themeCheckbox.addEventListener('change', e => setTheme(e.target.checked));
-            setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+            document.querySelectorAll('.drawer a').forEach(link => {
+                link.addEventListener('click', (e) => { e.preventDefault(); const page = link.getAttribute('data-page'); if(pages.includes(page)) showPage(page); });
+            });
 
-            function animateCounters() {
+            function startCounters() {
+                const counters = document.querySelectorAll('.counter');
                 counters.forEach(counter => {
                     const target = parseInt(counter.getAttribute('data-target'), 10);
                     let current = 0;
-                    const increment = target / 40;
-                    const update = () => {
+                    const increment = target / 50;
+                    const updateCounter = () => {
                         current += increment;
-                        if (current < target) { counter.textContent = Math.floor(current); requestAnimationFrame(update); }
+                        if(current < target) { counter.textContent = Math.floor(current); requestAnimationFrame(updateCounter); }
                         else { counter.textContent = target; }
                     };
-                    update();
+                    updateCounter();
                 });
             }
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) { animateCounters(); observer.unobserve(entry.target); } });
-            }, { threshold: 0.5 });
-            const statsSection = document.querySelector('.stats');
-            if (statsSection) observer.observe(statsSection);
 
-            document.querySelectorAll('.faq-question').forEach(q => {
-                q.addEventListener('click', () => {
-                    const item = q.closest('.faq-item');
-                    item.classList.toggle('active');
-                    const icon = q.querySelector('i');
-                    icon.classList.toggle('fa-plus');
-                    icon.classList.toggle('fa-minus');
-                });
-            });
+            function showComingSoon() { toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
+            document.querySelectorAll('.store-btn, .social-link, #sendMsgBtn').forEach(el => { el.addEventListener('click', (e) => { e.preventDefault(); showComingSoon(); }); });
 
-            const fadeElements = document.querySelectorAll('.fade-in');
-            const fadeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-            }, { threshold: 0.1 });
-            fadeElements.forEach(el => fadeObserver.observe(el));
+            showPage('home');
+            startCounters();
         })();
     </script>
 </body>
