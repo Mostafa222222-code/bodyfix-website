@@ -27,7 +27,6 @@
             --card-shadow: 0 20px 35px -12px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.02);
             --hover-shadow: 0 30px 40px -18px rgba(79,124,255,0.3);
             --gradient: linear-gradient(145deg, #0A2C6F, #1F46C7, #4F7CFF);
-            --btn-theme-bg: #e2e8f0;
         }
 
         [data-theme="dark"] {
@@ -43,7 +42,6 @@
             --card-shadow: 0 25px 40px -12px rgba(0,255,200,0.15);
             --hover-shadow: 0 30px 45px -12px #00E6B3;
             --gradient: linear-gradient(135deg, #00E6B3, #2AD4B6);
-            --btn-theme-bg: #1e2a3a;
         }
 
         body {
@@ -72,23 +70,7 @@
         .logo span { font-size: 1.8rem; font-weight: 900; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .menu-icon { font-size: 1.8rem; cursor: pointer; background: var(--surface-soft); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 30px; transition: all 0.2s; }
         .controls { display: flex; gap: 12px; }
-        .theme-btn {
-            background: var(--btn-theme-bg);
-            border: 1px solid var(--border);
-            border-radius: 40px;
-            padding: 8px 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            gap: 8px;
-            transition: all 0.2s;
-            color: var(--text);
-        }
-        .theme-btn:hover {
-            transform: scale(1.02);
-            background: var(--primary);
-            color: white;
-        }
+        .theme-btn { background: var(--surface-soft); border: 1px solid var(--border); border-radius: 40px; padding: 8px 16px; font-weight: 600; cursor: pointer; display: flex; gap: 8px; transition: 0.2s; }
 
         .drawer {
             position: fixed;
@@ -139,7 +121,7 @@
     <div class="top-bar">
         <div class="logo"><img src="https://www.image2url.com/r2/default/images/1776436848581-ee1b10f8-2b70-4dfe-ba92-65ebbdd6cc7b.png" alt="BodyFix"><span>BodyFix</span></div>
         <div style="display: flex; gap: 12px;">
-            <div class="controls"><div class="theme-btn" id="themeToggle"><i class="fas fa-moon"></i> <span id="themeText">الوضع المظلم</span></div></div>
+            <div class="controls"><div class="theme-btn" id="themeToggle"><i class="fas fa-moon" id="themeIcon"></i> <span id="themeText">الوضع المظلم</span></div></div>
             <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
         </div>
     </div>
@@ -252,6 +234,7 @@
         (function(){
             const html = document.documentElement;
             const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
             const themeText = document.getElementById('themeText');
             const menuIcon = document.getElementById('menuIcon');
             const drawer = document.getElementById('drawer');
@@ -260,21 +243,24 @@
             const toast = document.getElementById('toastMsg');
 
             let dark = localStorage.getItem('theme') === 'dark';
-            function setTheme(isDark) {
+            
+            function setTheme(isDark) { 
                 if(isDark) {
                     html.setAttribute('data-theme', 'dark');
+                    themeIcon.className = 'fas fa-sun';
                     themeText.textContent = 'الوضع الفاتح';
-                    themeToggle.querySelector('i').className = 'fas fa-sun';
                 } else {
                     html.removeAttribute('data-theme');
+                    themeIcon.className = 'fas fa-moon';
                     themeText.textContent = 'الوضع المظلم';
-                    themeToggle.querySelector('i').className = 'fas fa-moon';
                 }
             }
+            
             setTheme(dark);
-            themeToggle.addEventListener('click', () => {
-                dark = !dark;
-                setTheme(dark);
+            
+            themeToggle.addEventListener('click', () => { 
+                dark = !dark; 
+                setTheme(dark); 
                 localStorage.setItem('theme', dark ? 'dark' : 'light');
             });
 
